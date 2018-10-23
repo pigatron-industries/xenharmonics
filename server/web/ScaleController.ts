@@ -7,17 +7,15 @@ import {$log} from 'ts-log-debug';
 // import UserService from "../service/UserService";
 
 
-@Controller('/test')
-export class TestController {
+@Controller('/scale')
+export class ScaleController {
 
   constructor() {
   }
 
   @Get('')
-  public test(): any {
-    $log.info('test controller called');
+  public getAll(): any {
     return {'test': 'API works'};
   }
-
 
 }
