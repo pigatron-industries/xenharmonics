@@ -1,7 +1,7 @@
 import {
   Controller, Get, Post, Authenticated, Delete, BodyParams, Required, PathParams, QueryParams, Put
 } from '@tsed/common';
-import {Scale} from '../entity/Scale';
+import {Scale} from '../model/Scale';
 import {ScaleService} from '../service/ScaleService';
 import {NotFound} from 'ts-httpexceptions';
 
