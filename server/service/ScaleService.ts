@@ -7,7 +7,6 @@ import {Scale} from '../model/Scale';
 export class ScaleService {
 
   constructor(@Inject(Scale) private scaleModel: MongooseModel<Scale>) {
-    console.log(scaleModel);
   }
 
   async getAll(): Promise<Scale[]> {

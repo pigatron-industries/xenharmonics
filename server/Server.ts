@@ -53,7 +53,6 @@ export class Server extends ServerLoader {
 
   public $onReady() {
     $log.info('Server initialized');
-    $log.info(rootDir);
   }
 
   public $onServerInitError(err) {
