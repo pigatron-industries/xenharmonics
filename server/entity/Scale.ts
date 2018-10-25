@@ -11,4 +11,6 @@ export class Scale {
   @Required()
   name: string;
 
+
+
 }

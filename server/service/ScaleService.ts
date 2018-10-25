@@ -10,6 +10,10 @@ export class ScaleService {
     console.log(scaleModel);
   }
 
+  async getAll(): Promise<Scale[]> {
+    return await this.scaleModel.find().exec();
+  }
+
   async findById(id: string): Promise<Scale> {
     return await this.scaleModel.findById(id).exec();
   }

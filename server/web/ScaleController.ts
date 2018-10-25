@@ -12,6 +12,11 @@ export class ScaleController {
   constructor(private scaleService: ScaleService) {
   }
 
+  @Get('/')
+  async getAll(): Promise<Scale[]> {
+    return this.scaleService.getAll();
+  }
+
   @Get('/:id')
   async findById(@Required() @PathParams('id') id: string): Promise<Scale> {
     const scale = await this.scaleService.findById(id);
@@ -24,7 +29,6 @@ export class ScaleController {
 
   @Put('/')
   save(@BodyParams() scale: Scale): Promise<Scale> {
-    console.log(scale);
     return this.scaleService.save(scale);
   }
 
