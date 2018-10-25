@@ -9,6 +9,10 @@
   flex-direction: column;
 }
 
+.flexFull {
+  flex: 1 1 auto;
+}
+
 .flexRowRight {
   @extend .flexRow;
   justify-content: flex-end;
