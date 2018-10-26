@@ -19,7 +19,7 @@ export class ScaleService {
 
   async save(scale: Scale): Promise<Scale> {
     const model = new this.scaleModel(scale);
-    await model.save();
+    await model.update(scale, {upsert: true});
     return model;
   }
 
