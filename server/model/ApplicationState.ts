@@ -1,11 +1,11 @@
-import {IgnoreProperty} from '@tsed/common';
+import {IgnoreProperty, Property} from '@tsed/common';
 import {Model, Ref} from '@tsed/mongoose';
 import {Scale} from './Scale';
 
 @Model()
 export class ApplicationState {
 
-  @IgnoreProperty()
+  @Property()
   _id: string;
 
   @Ref(Scale)
