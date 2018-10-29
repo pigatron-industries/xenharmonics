@@ -2,14 +2,14 @@
   "name": "xenharmonics",
   "version": "0.0.0",
   "scripts": {
-    "ng": "ng",
-    "start": "node ./dist/server/index.js",
+    "installDev": "npm install && npm run installWiringPiDev",
+    "installProd": "npm install && npm run installWiringPiProd",
+    "installWiringPiDev": "npm install --no-save wiring-pi --ignore-scripts",
+    "installWiringPiProd": "npm install --no-save wiring-pi",
     "buildClient": "ng build",
     "buildServer": "./node_modules/typescript/bin/tsc -p server",
     "build": "npm run buildClient && npm run buildServer",
-    "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e"
+    "start": "node ./dist/server/index.js"
   },
   "private": true,
   "dependencies": {
@@ -50,6 +50,7 @@
     "@types/mongoose": "^5.2.19",
     "@types/node": "~8.9.4",
     "@types/swagger-schema-official": "^2.0.12",
+    "@types/wiring-pi": "^2.2.3",
     "codelyzer": "~4.2.1",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",

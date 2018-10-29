@@ -1,12 +1,20 @@
-# Seed Project
-
-Seed project for Angular CLI, Typscript backend, MongoDB
+# Xenharmonics
 
 ## Build
 
-Run `npm run build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Install dependencies for development outside of the target environment (Raspberry Pi). Does not compile Pi specific IO modules:
+
+`npm run installDev`
+
+Install dependencies for builind on the Raspberry Pi:
+
+`npm run installProd`
+
+Build the project. The build artifacts will be stored in the `dist/` directory:
+
+`npm run build`
 
 ## Run
 
-Run `npm run start`
+`npm run start`
 
