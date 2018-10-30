@@ -2,17 +2,25 @@
 
 ## Build
 
-Install dependencies for development outside of the target environment (Raspberry Pi). Does not compile Pi specific IO modules:
+Build on unsupported platform
 
-`npm run installDev`
+`npm run installUnsupported`
 
-Install dependencies for builind on the Raspberry Pi:
-
-`npm run installProd`
-
-Build the project. The build artifacts will be stored in the `dist/` directory:
+`npm run configUnsupported`
 
 `npm run build`
+
+
+Build on Raspberry Pi
+
+`npm run installPi`
+
+`npm run configPi`
+
+`npm run build`
+
+
+The build artifacts will be stored in the `dist/` directory:
 
 ## Run
 

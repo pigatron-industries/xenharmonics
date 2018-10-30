@@ -16,8 +16,7 @@ const rootDir = path.resolve(__dirname);
     '/api': `${rootDir}/web/**/**.js`
   },
   componentsScan: [
-    `${rootDir}/service/**/**.js`,
-    `${rootDir}/io/**/**.js`
+    `${rootDir}/service/**/**.js`
   ],
   acceptMimes: ['application/json'],
   serveStatic: {'/': `${rootDir}/../client`},
