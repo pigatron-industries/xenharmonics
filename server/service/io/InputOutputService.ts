@@ -1,6 +1,6 @@
 import {OnInit, Service} from '@tsed/common';
-import {getInputOutputService} from '../io/InputOutputServiceFactory';
-import {InputOutputServiceInterface} from '../io/InputOutputServiceInterface';
+import {getInputOutputService} from '../../io/InputOutputServiceFactory';
+import {InputOutputServiceInterface} from '../../io/InputOutputServiceInterface';
 
 
 @Service()

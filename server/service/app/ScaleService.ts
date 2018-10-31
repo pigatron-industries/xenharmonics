@@ -1,6 +1,6 @@
 import {Inject, Service} from '@tsed/common';
 import {MongooseModel} from '@tsed/mongoose';
-import {Scale} from '../model/Scale';
+import {Scale} from '../../model/Scale';
 
 
 @Service()

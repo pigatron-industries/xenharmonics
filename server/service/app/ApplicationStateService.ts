@@ -1,8 +1,8 @@
 import {Inject, OnInit, Service} from '@tsed/common';
 import {MongooseModel, Ref} from '@tsed/mongoose';
-import {ApplicationState} from '../model/ApplicationState';
 import {$log} from 'ts-log-debug';
-import {Scale} from '../model/Scale';
+import {ApplicationState} from '../../model/ApplicationState';
+import {Scale} from '../../model/Scale';
 import {ScaleService} from './ScaleService';
 
 
