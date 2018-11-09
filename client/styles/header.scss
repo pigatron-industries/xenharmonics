@@ -1,0 +1,29 @@
+@font-face {
+  font-family: audiowide;
+  src: url('/assets/fonts/Audiowide-Regular.ttf') format("truetype");
+}
+
+header {
+  height: 70px;
+  background-color: #34302d;
+}
+
+.company {
+  position:relative;
+}
+
+.pigatron, .industries {
+  position:absolute;
+  color: white;
+  font-family: audiowide;
+}
+
+.pigatron {
+  font-size: 38px;
+}
+
+.industries {
+  font-size: 17px;
+  top: 38px;
+  left: 64px;
+}
