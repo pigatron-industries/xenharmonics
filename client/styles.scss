@@ -1,3 +1,4 @@
+@import '~@angular/material/prebuilt-themes/pink-bluegrey.css';
 
 @import 'styles/flex';
 @import 'styles/header.scss';
@@ -7,8 +8,6 @@ body {
   margin:0;
   padding:0;
   height:100%;
-  background-color: rgb(250,250,250);
-  /*overflow-x: hidden;*/
   font-family: Roboto, "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
 }
