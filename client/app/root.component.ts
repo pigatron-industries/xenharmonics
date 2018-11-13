@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class RootComponent {
   title = 'xenharmonics';
+  navLinks = [
+    { path: 'control', label: 'Control' },
+    { path: 'scales', label: 'Scales' }
+  ];
 }

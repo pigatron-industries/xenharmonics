@@ -7,11 +7,17 @@
         </div>
     </div>
   </header>
-  <div class="flexRow flexGrow">
-    <mat-tab-group class="flexGrow">
-      <mat-tab label="Control"> Control </mat-tab>
-      <mat-tab label="Scales"> Scales </mat-tab>
-    </mat-tab-group>
+  <div class="flexRow">
+    <nav mat-tab-nav-bar class="flexGrow">
+      <a mat-tab-link
+         *ngFor="let link of navLinks"
+         [routerLink]="link.path"
+         routerLinkActive #rla="routerLinkActive"
+         [active]="rla.isActive">
+        {{link.label}}
+      </a>
+    </nav>
   </div>
+  <router-outlet></router-outlet>
 </div>
 
