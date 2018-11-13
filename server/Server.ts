@@ -19,7 +19,12 @@ const rootDir = path.resolve(__dirname);
     `${rootDir}/service/**/**.js`
   ],
   acceptMimes: ['application/json'],
-  serveStatic: {'/': `${rootDir}/../client`},
+  serveStatic: {
+    '/': `${rootDir}/../client`,
+    '/control': `${rootDir}/../client`,
+    '/scales': `${rootDir}/../client`,
+    '/scales/**': `${rootDir}/../client`,
+  },
   mongoose: {
     url: 'mongodb://127.0.0.1:27017/db1'
   },

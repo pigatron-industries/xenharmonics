@@ -12,6 +12,7 @@ import {ScalesComponent} from './scales/scales.component';
 const routes = [
   { path: 'control', component: ControlComponent },
   { path: 'scales', component: ScalesComponent },
+  { path: 'scales/:id', component: ScalesComponent },
 ];
 
 @NgModule({
