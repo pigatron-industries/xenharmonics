@@ -26,7 +26,8 @@ export class InputOutputService implements OnInit {
   }
 
   public dacLatch() {
-
+    this.io.digitalWrite(config.dacLatchPin, true);
+    this.io.digitalWrite(config.dacLatchPin, false);
   }
 
 }

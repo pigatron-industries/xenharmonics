@@ -29,14 +29,13 @@ export class ControlOutputService implements OnInit {
 
   public setVoltageOutputs(newControlVoltages: ControlVoltage[]): ControlVoltage[] {
     for (const newControlVoltage of newControlVoltages) {
-      this.controlVoltages[newControlVoltage.channel] = newControlVoltage;
+      this.controlVoltages[newControlVoltage.channel].setVoltage(newControlVoltage.voltage);
     }
     return this.controlVoltages;
   }
 
-  public latch() {
-    // TODO
-    // shiftOut each control voltage
-    // toggle latch on/off
+  public send() {
+    this.inputOutputSevice.dacShiftOut(this.controlVoltages);
+    this.inputOutputSevice.dacLatch();
   }
 }

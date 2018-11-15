@@ -18,5 +18,11 @@ export class OutputController {
     return this.controlOutputService.setVoltageOutputs(controlVoltages);
   }
 
+  @Put('/send')
+  send(): any {
+    this.controlOutputService.send();
+    return '';
+  }
+
 }
 
