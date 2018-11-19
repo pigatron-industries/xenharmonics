@@ -1,5 +1,5 @@
 import {BodyParams, Controller, Get, PathParams, Put, Required} from '@tsed/common';
-import {ControlVoltage} from '../model/ControlVoltage';
+import {ControlVoltageOutput} from '../model/ControlVoltageOutput';
 import {ControlOutputService} from '../service/io/ControlOutputService';
 
 @Controller('/output')
@@ -9,12 +9,12 @@ export class OutputController {
   }
 
   @Get('/voltage')
-  get(): ControlVoltage[] {
+  get(): ControlVoltageOutput[] {
     return this.controlOutputService.getVoltageOutputs();
   }
 
   @Put('/voltage')
-  output(@BodyParams() controlVoltages: ControlVoltage[]): ControlVoltage[] {
+  output(@BodyParams() controlVoltages: ControlVoltageOutput[]): ControlVoltageOutput[] {
     return this.controlOutputService.setVoltageOutputs(controlVoltages);
   }
 

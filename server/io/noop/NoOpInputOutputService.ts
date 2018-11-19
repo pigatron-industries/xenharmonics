@@ -1,5 +1,5 @@
 import {$log} from 'ts-log-debug';
-import {InputOutputServiceInterface, ByteOrder} from './InputOutputServiceInterface';
+import {InputOutputServiceInterface, ByteOrder} from '../InputOutputServiceInterface';
 
 export class NoOpInputOutputService implements InputOutputServiceInterface {
 

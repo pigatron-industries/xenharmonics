@@ -4,8 +4,8 @@
   "scripts": {
     "installUnsupported": "npm install && npm run installWiringPiUnsupported",
     "installPi": "npm install && npm run installWiringPi",
-    "installWiringPiUnsupported": "npm install --no-save wiring-pi --ignore-scripts",
-    "installWiringPi": "npm install --no-save wiring-pi",
+    "installWiringPiUnsupported": "npm install --no-save node-wiring-pi --ignore-scripts",
+    "installWiringPi": "npm install --no-save node-wiring-pi",
     "configPi": "cp ./server/configs/configPi.ts ./server/config.ts",
     "configUnsupported": "cp ./server/configs/configUnsupported.ts ./server/config.ts",
     "buildClient": "ng build",

@@ -1,7 +1,7 @@
 import {OnInit, Service} from '@tsed/common';
 import {getInputOutputService} from '../../io/InputOutputServiceFactory';
 import {InputOutputServiceInterface, ByteOrder} from '../../io/InputOutputServiceInterface';
-import {ControlVoltage} from '../../model/ControlVoltage';
+import {ControlVoltageOutput} from '../../model/ControlVoltageOutput';
 
 import {config} from '../../config';
 
@@ -17,7 +17,7 @@ export class InputOutputService implements OnInit {
     return this.io;
   }
 
-  public dacShiftOut(controlVoltages: ControlVoltage[]) {
+  public dacShiftOut(controlVoltages: ControlVoltageOutput[]) {
     for (const controlVoltage of controlVoltages) {
       const bytes: number[] = controlVoltage.getBytes();
       this.io.shiftOut(config.dacDataPin, config.dacClockPin, ByteOrder.MSBFIRST, bytes[0]);

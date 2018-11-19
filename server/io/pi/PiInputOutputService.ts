@@ -1,7 +1,7 @@
 import {$log} from 'ts-log-debug';
 import * as pi from 'wiring-pi';
-import {InputOutputServiceInterface, ByteOrder} from './InputOutputServiceInterface';
-import {HIGH, LOW} from 'wiring-pi';
+import {InputOutputServiceInterface, ByteOrder} from '../InputOutputServiceInterface';
+import {HIGH, LOW} from 'node-wiring-pi';
 
 
 export class PiInputOutputService implements InputOutputServiceInterface {

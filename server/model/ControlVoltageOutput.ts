@@ -11,7 +11,7 @@ const RANGE_FLOAT = MAX_FLOAT_VALUE - MIN_FLOAT_VALUE;
 const RANGE_BINARY = MAX_BINARY_VALUE - MIN_BINARY_VALUE;
 
 
-export class ControlVoltage {
+export class ControlVoltageOutput {
 
   @Required()
   @Description('Channel number this voltage is output to')
