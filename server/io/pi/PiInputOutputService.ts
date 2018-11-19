@@ -1,7 +1,6 @@
 import {$log} from 'ts-log-debug';
-import * as pi from 'wiring-pi';
+import * as pi from 'node-wiring-pi';
 import {InputOutputServiceInterface, ByteOrder} from '../InputOutputServiceInterface';
-import {HIGH, LOW} from 'node-wiring-pi';
 
 
 export class PiInputOutputService implements InputOutputServiceInterface {
@@ -15,7 +14,7 @@ export class PiInputOutputService implements InputOutputServiceInterface {
   }
 
   digitalWrite(pin: number, state: boolean) {
-    pi.digitalWrite(pin, state ? HIGH : LOW);
+    pi.digitalWrite(pin, state ? pi.HIGH : pi.LOW);
   }
 
   public shiftOut(dataPin: number, clockPin: number, order: ByteOrder, value: number) {
