@@ -1,14 +1,12 @@
-import {Model, Unique} from '@tsed/mongoose';
 import {Property, Required} from '@tsed/common';
 import {Description} from '@tsed/swagger';
 
-@Model()
+
 export class Scale {
 
   @Property()
-  _id: string;
+  id: number;
 
-  @Unique()
   @Required()
   @Description('Name of the scale')
   name: string;
@@ -21,7 +19,7 @@ export class Scale {
   @Description('The notes in a single octave of the scale. Values in cents.')
   notesCents: number[];
 
-  @Description('The number od cents when the next octave starts. e.g. 1200')
+  @Description('The number of cents when the next octave starts. e.g. 1200')
   octaveCents: number;
 
 }

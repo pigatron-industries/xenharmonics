@@ -1,16 +1,18 @@
-import {Inject, OnInit, Service} from '@tsed/common';
-import {MongooseModel, Ref} from '@tsed/mongoose';
+import {OnInit, Service} from '@tsed/common';
 import {$log} from 'ts-log-debug';
 import {ApplicationState} from '../../model/ApplicationState';
 import {Scale} from '../../model/Scale';
 import {ScaleService} from './ScaleService';
+import {StorageService} from '../storage/StorageSevice';
 
 
 @Service()
 export class ApplicationStateService implements OnInit {
 
-  constructor(@Inject(ApplicationState) private stateModel: MongooseModel<ApplicationState>,
-              @Inject(ScaleService) private scaleService: ScaleService) {
+  private applicationState: ApplicationState;
+
+  constructor(private scaleService: ScaleService,
+              private storageService: StorageService) {
   }
 
   $onInit() {
@@ -18,38 +20,25 @@ export class ApplicationStateService implements OnInit {
   }
 
   async createState() {
-    const states = await this.stateModel.find().exec();
-    if (states.length === 0) {
+    if (!this.applicationState) {
       $log.info('Creating initial application state');
-      const stateModel = new this.stateModel(new ApplicationState());
-      return await stateModel.save();
+      this.applicationState = new ApplicationState();
     } else {
-      return states[0];
+      return this.applicationState;
     }
   }
 
   async getState(): Promise<ApplicationState> {
-    const states = await this.stateModel.find().exec();
-    return states[0];
-  }
-
-  async saveState(applicationState: ApplicationState): Promise<ApplicationState> {
-    const model = new this.stateModel(applicationState);
-    await model.update(applicationState, {upsert: true});
-    return model;
+    return this.applicationState;
   }
 
   async getSelectedScale(): Promise<Scale> {
-    const applicationState = await this.getState();
-    console.log(applicationState.selectedScale);
-    return await this.scaleService.findById(applicationState.selectedScale.toString());
+    return this.scaleService.findById(this.applicationState.selectedScale);
   }
 
-  async setSelectedScale(scaleId: string): Promise<Scale> {
-    const applicationState = await this.getState();
-    applicationState.selectedScale = scaleId;
-    await this.saveState(applicationState);
-    return await this.scaleService.findById(applicationState.selectedScale.toString());
+  async setSelectedScale(scaleId: number): Promise<Scale> {
+    this.applicationState.selectedScale = scaleId;
+    return this.getSelectedScale();
   }
 
 }

@@ -1,6 +1,5 @@
 import {ServerLoader, ServerSettings} from '@tsed/common';
 import '@tsed/servestatic';
-import '@tsed/mongoose';
 import '@tsed/swagger';
 import {$log} from 'ts-log-debug';
 import * as path from 'path';
@@ -24,9 +23,6 @@ const rootDir = path.resolve(__dirname);
     '/control': `${rootDir}/../client`,
     '/scales': `${rootDir}/../client`,
     '/scales/**': `${rootDir}/../client`,
-  },
-  mongoose: {
-    url: 'mongodb://127.0.0.1:27017/db1'
   },
   swagger: [
     {path: '/api-docs'}
