@@ -6,4 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./scales.component.scss']
 })
 export class ScalesComponent {
+
+  columnsToDisplay = ['actions', 'name'];
+
+  scales = [ {id: 1, name: 'test'} ];
+
 }

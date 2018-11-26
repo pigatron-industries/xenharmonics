@@ -1,8 +1,9 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router';
-import {MatButtonModule, MatTabsModule} from '@angular/material';
+import {MatButtonModule, MatTabsModule, MatTableModule, MatIconModule} from '@angular/material';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
+import {HttpClientModule} from '@angular/common/http';
 
 import {RootComponent} from './root.component';
 import {ControlComponent} from './control/control.component';
@@ -25,8 +26,11 @@ const routes = [
     BrowserModule,
     NoopAnimationsModule,
     RouterModule.forRoot(routes),
+    HttpClientModule,
     MatTabsModule,
-    MatButtonModule
+    MatButtonModule,
+    MatIconModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [RootComponent]
