@@ -2,6 +2,8 @@ import {Service, OnInit} from '@tsed/common';
 import {Scale} from '../../model/Scale';
 import {StorageService} from '../storage/StorageSevice';
 
+const SCALES_KEY = 'xen_scales';
+
 @Service()
 export class ScaleService implements OnInit {
 
@@ -15,15 +17,14 @@ export class ScaleService implements OnInit {
   }
 
   private async loadScales() {
-    const scales = await this.storageService.load('xen_scales');
+    const scales = await this.storageService.load(SCALES_KEY);
     if (scales) {
       this.scales = scales;
     }
-    console.log(this.scales);
   }
 
   private saveScales() {
-    this.storageService.save('xen_scales', this.scales);
+    this.storageService.save(SCALES_KEY, this.scales);
   }
 
   async getAll(): Promise<Scale[]> {

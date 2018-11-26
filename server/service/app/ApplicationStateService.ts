@@ -11,8 +11,7 @@ export class ApplicationStateService implements OnInit {
 
   private applicationState: ApplicationState;
 
-  constructor(private scaleService: ScaleService,
-              private storageService: StorageService) {
+  constructor(private scaleService: ScaleService) {
   }
 
   $onInit() {
