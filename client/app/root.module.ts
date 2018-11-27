@@ -8,19 +8,21 @@ import {HttpClientModule} from '@angular/common/http';
 import {RootComponent} from './root.component';
 import {ControlComponent} from './control/control.component';
 import {ScalesComponent} from './scales/scales.component';
+import {ScaleComponent} from './scales/scale.component';
 
 
 const routes = [
   { path: 'control', component: ControlComponent },
   { path: 'scales', component: ScalesComponent },
-  { path: 'scales/:id', component: ScalesComponent },
+  { path: 'scales/:id', component: ScaleComponent },
 ];
 
 @NgModule({
   declarations: [
     RootComponent,
     ControlComponent,
-    ScalesComponent
+    ScalesComponent,
+    ScaleComponent
   ],
   imports: [
     BrowserModule,
