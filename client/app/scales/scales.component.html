@@ -1,4 +1,7 @@
 <div>
+  <mat-toolbar>
+    <a mat-button routerLink="new"><mat-icon>add_box</mat-icon></a>
+  </mat-toolbar>
   <table mat-table [dataSource]="scales">
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef></th>

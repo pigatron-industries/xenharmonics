@@ -1,7 +1,7 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router';
-import {MatButtonModule, MatTabsModule, MatTableModule, MatIconModule} from '@angular/material';
+import {MatButtonModule, MatTabsModule, MatTableModule, MatIconModule, MatToolbarModule} from '@angular/material';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {HttpClientModule} from '@angular/common/http';
 
@@ -30,7 +30,8 @@ const routes = [
     MatTabsModule,
     MatButtonModule,
     MatIconModule,
-    MatTableModule
+    MatTableModule,
+    MatToolbarModule
   ],
   providers: [],
   bootstrap: [RootComponent]
