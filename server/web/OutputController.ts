@@ -15,11 +15,11 @@ export class OutputController {
 
   @Put('/voltage')
   output(@BodyParams() controlVoltages: ControlVoltageOutput[], @QueryParams('send') send: boolean): ControlVoltageOutput[] {
-    const controlVoltages = this.controlOutputService.setVoltageOutputs(controlVoltages);
+    const response = this.controlOutputService.setVoltageOutputs(controlVoltages);
     if (send) {
       this.controlOutputService.send();
     }
-    return controlVoltages;
+    return response;
   }
 
   @Put('/send')
