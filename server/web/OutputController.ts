@@ -1,4 +1,4 @@
-import {BodyParams, Controller, Get, PathParams, Put, Required} from '@tsed/common';
+import {BodyParams, Controller, Get, Put, QueryParams, Required} from '@tsed/common';
 import {ControlVoltageOutput} from '../model/ControlVoltageOutput';
 import {ControlOutputService} from '../service/io/ControlOutputService';
 
@@ -14,8 +14,12 @@ export class OutputController {
   }
 
   @Put('/voltage')
-  output(@BodyParams() controlVoltages: ControlVoltageOutput[]): ControlVoltageOutput[] {
-    return this.controlOutputService.setVoltageOutputs(controlVoltages);
+  output(@BodyParams() controlVoltages: ControlVoltageOutput[], @QueryParams('send') send: boolean): ControlVoltageOutput[] {
+    const controlVoltages = this.controlOutputService.setVoltageOutputs(controlVoltages);
+    if(send) {
+      this.controlOutputService.send();
+    }
+    return controlVoltages;
   }
 
   @Put('/send')
