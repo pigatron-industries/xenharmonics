@@ -14,14 +14,17 @@ export class InputOutputService implements OnInit {
   async $onInit() {
     this.io = await getInputOutputService();
     this.io.setup();
-    this.setPinModes();
+    this.setupPins();
     return this.io;
   }
 
-  private setPinModes() {
+  private setupPins() {
     this.io.setPinMode(config.dacDataPin, PinMode.OUTPUT);
     this.io.setPinMode(config.dacClockPin, PinMode.OUTPUT);
     this.io.setPinMode(config.dacLatchPin, PinMode.OUTPUT);
+    this.io.digitalWrite(config.dacDataPin, false);
+    this.io.digitalWrite(config.dacClockPin, false);
+    this.io.digitalWrite(config.dacLatchPin, false);
   }
 
   public dacShiftOut(controlVoltages: ControlVoltageOutput[]) {
