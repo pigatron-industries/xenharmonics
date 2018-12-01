@@ -1,6 +1,6 @@
 import {OnInit, Service} from '@tsed/common';
 import {getInputOutputService} from '../../io/InputOutputServiceFactory';
-import {InputOutputServiceInterface, ByteOrder} from '../../io/InputOutputServiceInterface';
+import {InputOutputServiceInterface, ByteOrder, PinMode} from '../../io/InputOutputServiceInterface';
 import {ControlVoltageOutput} from '../../model/ControlVoltageOutput';
 
 import {config} from '../../config';
@@ -14,7 +14,14 @@ export class InputOutputService implements OnInit {
   async $onInit() {
     this.io = await getInputOutputService();
     this.io.setup();
+    this.setPinModes();
     return this.io;
+  }
+
+  private setPinModes() {
+    this.io.setPinMode(config.dacDataPin, PinMode.OUTPUT);
+    this.io.setPinMode(config.dacClockPin, PinMode.OUTPUT);
+    this.io.setPinMode(config.dacLatchPin, PinMode.OUTPUT);
   }
 
   public dacShiftOut(controlVoltages: ControlVoltageOutput[]) {

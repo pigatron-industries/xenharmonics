@@ -1,5 +1,5 @@
 import {$log} from 'ts-log-debug';
-import {InputOutputServiceInterface, ByteOrder} from '../InputOutputServiceInterface';
+import {InputOutputServiceInterface, ByteOrder, PinMode} from '../InputOutputServiceInterface';
 
 export class NoOpInputOutputService implements InputOutputServiceInterface {
 
@@ -8,6 +8,10 @@ export class NoOpInputOutputService implements InputOutputServiceInterface {
 
   setup() {
     $log.info('Initialising NoOp GPIO.');
+  }
+
+  public setPinMode(pin: number, mode: PinMode) {
+    $log.info('setPinMode ' + pin + ' ' + mode);
   }
 
   digitalWrite(pin: number, state: boolean) {
