@@ -1,7 +1,7 @@
 export const config = {
   platform: 'pi',
-  dacClockPin: 1,
-  dacDataPin: 2,
-  dacLatchPin: 3,
-  dacOutputChannels: 10,
+  dacClockPin: 2,
+  dacDataPin: 3,
+  dacLatchPin: 4,
+  dacOutputChannels: 2,
 };
