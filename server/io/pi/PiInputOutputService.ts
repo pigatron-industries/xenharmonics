@@ -10,7 +10,7 @@ export class PiInputOutputService implements InputOutputServiceInterface {
 
   public setup() {
     $log.info('Initialising Raspberry Pi GPIO.');
-    pi.wiringPiSetup();
+    pi.wiringPiSetupGpio();
   }
 
   digitalWrite(pin: number, state: boolean) {
