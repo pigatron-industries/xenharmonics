@@ -30,8 +30,8 @@ export class InputOutputService implements OnInit {
   public dacShiftOut(controlVoltages: ControlVoltageOutput[]) {
     for (const controlVoltage of controlVoltages) {
       const bytes: number[] = controlVoltage.getBytes();
-      this.io.shiftOut(config.dacDataPin, config.dacClockPin, ByteOrder.MSBFIRST, bytes[0]);
       this.io.shiftOut(config.dacDataPin, config.dacClockPin, ByteOrder.MSBFIRST, bytes[1]);
+      this.io.shiftOut(config.dacDataPin, config.dacClockPin, ByteOrder.MSBFIRST, bytes[0]);
     }
   }
 

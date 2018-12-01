@@ -2,7 +2,7 @@ import {IgnoreProperty, Required} from '@tsed/common';
 import {Description} from '@tsed/swagger';
 
 const MAX_FLOAT_VALUE = 10;
-const MIN_FLOAT_VALUE = 0;
+const MIN_FLOAT_VALUE = -10;
 
 const MAX_BINARY_VALUE = 65535;
 const MIN_BINARY_VALUE = 0;
