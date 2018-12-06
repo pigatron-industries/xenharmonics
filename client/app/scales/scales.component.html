@@ -1,6 +1,8 @@
 <div>
   <mat-toolbar>
-    <a mat-button routerLink="new"><mat-icon>add_box</mat-icon></a>
+    <button mat-mini-fab matTooltip="Back" color="primary" routerLink="new">
+      <mat-icon aria-label="New">add_box</mat-icon>
+    </button>
   </mat-toolbar>
   <table mat-table [dataSource]="scales">
     <ng-container matColumnDef="actions">

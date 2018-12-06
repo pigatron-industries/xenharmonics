@@ -1,11 +1,25 @@
 <form *ngIf="scale!==null" [formGroup]="form" (ngSubmit)="save()">
 
-  <mat-form-field>
-    <input matInput placeholder="Name"
-           formControlName="name">
-    <mat-error *ngIf="form.controls.name.hasError('required')">
-      Name is required
-    </mat-error>
-  </mat-form-field>
+  <mat-toolbar>
+    <div class="buttons-bar" fxflex>
+      <button mat-mini-fab matTooltip="Back" color="primary" [routerLink]="'/scales'">
+        <mat-icon aria-label="Back">keyboard_arrow_left</mat-icon>
+      </button>
+      <button mat-mini-fab matTooltip="Save" [color]="form.dirty ? 'accent' : 'primary'"
+              [disabled]="!form.valid">
+        <mat-icon aria-label="Save">save</mat-icon>
+      </button>
+    </div>
+  </mat-toolbar>
+
+  <div class="contentWrapper">
+    <mat-form-field>
+      <input matInput placeholder="Name"
+             formControlName="name">
+      <mat-error *ngIf="form.controls.name.hasError('required')">
+        Name is required
+      </mat-error>
+    </mat-form-field>
+  </div>
 
 </form>
