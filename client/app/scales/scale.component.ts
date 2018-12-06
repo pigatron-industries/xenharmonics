@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
+import {FormGroup, FormControl, Validators} from "@angular/forms";
 
 import {ScaleService} from './scale.service';
 import {Scale} from './Scale';
@@ -12,6 +13,12 @@ import {Scale} from './Scale';
 export class ScaleComponent implements OnInit {
 
   scale: Scale = null;
+
+  form = new FormGroup({
+    name: new FormControl('', [
+      Validators.required
+    ])
+  });
 
   constructor(private scaleService: ScaleService,
               private route: ActivatedRoute) {
