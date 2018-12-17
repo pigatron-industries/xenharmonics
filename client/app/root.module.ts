@@ -1,11 +1,11 @@
-import {BrowserModule} from '@angular/platform-browser';
+import {BrowserModule, HAMMER_GESTURE_CONFIG} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router';
 import {
   MatButtonModule, MatTabsModule, MatTableModule, MatIconModule, MatToolbarModule, MatFormFieldModule,
-  MatInputModule
+  MatInputModule, MatSliderModule
 } from '@angular/material';
-import {NoopAnimationsModule} from '@angular/platform-browser/animations';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HttpClientModule} from '@angular/common/http';
 
 import {RootComponent} from './root.component';
@@ -30,7 +30,7 @@ const routes = [
   ],
   imports: [
     BrowserModule,
-    NoopAnimationsModule,
+    BrowserAnimationsModule,
     RouterModule.forRoot(routes),
     HttpClientModule,
     MatTabsModule,
@@ -41,7 +41,8 @@ const routes = [
     FormsModule,
     ReactiveFormsModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatSliderModule
   ],
   providers: [],
   bootstrap: [RootComponent]
