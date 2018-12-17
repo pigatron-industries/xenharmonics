@@ -29,11 +29,27 @@ export class ScaleComponent implements OnInit {
       if (params['id'] === 'new') {
         this.scale = new Scale();
       } else {
-        this.scaleService.getById(params['id']).then((data: Scale) => {
-          this.scale = data;
-        });
+        this.load(params['id']);
       }
     });
   }
+
+  public async load(id: number) {
+    this.afterLoad(await this.scaleService.getById(id));
+  }
+
+  public afterLoad(data: Scale) {
+    this.scale = data;
+    this.form.patchValue(data);
+    this.form.markAsPristine();
+  }
+
+  public async save() {
+    Object.assign(this.scale, this.form.value);
+    const data = await this.scaleService.save(this.scale);
+    console.log(data);
+    this.afterLoad(data);
+  }
+
 
 }

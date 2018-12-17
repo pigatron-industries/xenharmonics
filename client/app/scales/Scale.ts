@@ -4,7 +4,7 @@ export class Scale {
   id: number;
   name: string;
   description: string;
-  notesCents: number[];
+  notesCents: number[] = [];
   octaveCents: number;
 
 }
