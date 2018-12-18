@@ -22,7 +22,13 @@
       </mat-error>
     </mat-form-field>
 
-    <mat-slider></mat-slider>
+    <div class="flexRow" *ngFor="let noteCents of scale.notesCents">
+      <mat-form-field class="flexCol">
+        <input matInput placeholder="Cents" [value]="noteCents">
+      </mat-form-field>
+      <mat-slider class="flexCol flexGrow" min="0" [max]="scale.octaveCents" [value]="noteCents">
+      </mat-slider>
+    </div>
 
   </div>
 
