@@ -22,36 +22,24 @@ export class ControlVoltageOutput {
   voltage: number;
 
   @IgnoreProperty()
-  bytes: number[];
+  intValue: number;
 
   constructor(channel: number, voltage: number) {
     this.channel = channel;
     this.voltage = voltage;
-    this.bytes = [0, 0];
-    this.calcBytes();
-  }
-
-  /* tslint:disable:no-bitwise */
-  private calcBytes() {
-    let intValue = Math.round((((this.voltage - MIN_FLOAT_VALUE) * RANGE_BINARY) / RANGE_FLOAT) + MIN_BINARY_VALUE);
-    for (let i = 0; i < this.bytes.length; i++) {
-      const byte = intValue & 0xff;
-      this.bytes[i] = byte;
-      intValue = (intValue - byte) / 256;
-    }
-  }
-  /* tslint:enable:no-bitwise */
-
-  public getBytes(): number[] {
-    return this.bytes;
+    this.calcIntValue();
   }
 
   public setVoltage(voltage: number) {
     this.voltage = voltage;
-    this.calcBytes();
+    this.calcIntValue();
+  }
+
+  private calcIntValue() {
+    this.intValue = Math.round((((this.voltage - MIN_FLOAT_VALUE) * RANGE_BINARY) / RANGE_FLOAT) + MIN_BINARY_VALUE);
   }
 
   public getIntValue(): number {
-    return Math.round((((this.voltage - MIN_FLOAT_VALUE) * RANGE_BINARY) / RANGE_FLOAT) + MIN_BINARY_VALUE);
+    return this.intValue;
   }
 }
