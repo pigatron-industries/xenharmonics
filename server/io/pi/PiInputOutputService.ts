@@ -25,4 +25,17 @@ export class PiInputOutputService implements InputOutputServiceInterface {
     pi.shiftOut(dataPin, clockPin, order === ByteOrder.LSBFIRST ? pi.LSBFIRST : pi.MSBFIRST, value);
   }
 
+  /* tslint:disable:no-bitwise */
+  public shiftOut16(dataPin: number, clockPin: number, value: number) {
+    $log.info('shiftOut16');
+    for (let i = 15; i >= 0; i--) {
+      pi.digitalWrite(dataPin, value & (1 << i) ? pi.HIGH : pi.LOW);
+      pi.digitalWrite(clockPin, pi.HIGH);
+      pi.digitalWrite(clockPin, pi.LOW);
+    }
+  }
+  /* tslint:enable:no-bitwise */
+
+
+
 }

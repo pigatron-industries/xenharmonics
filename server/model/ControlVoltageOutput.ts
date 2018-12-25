@@ -50,4 +50,8 @@ export class ControlVoltageOutput {
     this.voltage = voltage;
     this.calcBytes();
   }
+
+  public getIntValue(): number {
+    return Math.round((((this.voltage - MIN_FLOAT_VALUE) * RANGE_BINARY) / RANGE_FLOAT) + MIN_BINARY_VALUE);
+  }
 }

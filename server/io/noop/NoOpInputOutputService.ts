@@ -22,4 +22,14 @@ export class NoOpInputOutputService implements InputOutputServiceInterface {
     $log.info('shiftOut ' + dataPin + ' ' + clockPin + ' ' + order + ' ' + value);
   }
 
+  /* tslint:disable:no-bitwise */
+  public shiftOut16(dataPin: number, clockPin: number, value: number) {
+    $log.info('shiftOut16');
+    for (let i = 15; i >= 0; i--) {
+      const bit = value & (1 << i) ? 1 : 0;
+      $log.info(bit);
+    }
+  }
+  /* tslint:enable:no-bitwise */
+
 }
