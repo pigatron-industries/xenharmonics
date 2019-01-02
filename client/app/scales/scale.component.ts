@@ -47,9 +47,13 @@ export class ScaleComponent implements OnInit {
   public async save() {
     Object.assign(this.scale, this.form.value);
     const data = await this.scaleService.save(this.scale);
-    console.log(data);
     this.afterLoad(data);
   }
 
+  public addNote() {
+    const lastNote = this.scale.notesCents[this.scale.notesCents.length - 1];
+    this.scale.notesCents.push(lastNote);
+    this.form.markAsDirty();
+  }
 
 }
