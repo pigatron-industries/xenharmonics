@@ -22,12 +22,16 @@
       </mat-error>
     </mat-form-field>
 
-    <div class="flexRow" *ngFor="let noteCents of scale.notesCents">
+    <div class="flexRow" formArrayName="notesCents" *ngFor="let note of form.get('notesCents').controls; let i = index;">
+      <button type="button" mat-mini-fab matTooltip="Remove Note" (click)="removeNote(i)">
+        <mat-icon aria-label="Add Note">remove_circle</mat-icon>
+      </button>
       <mat-form-field class="flexCol">
-        <input matInput placeholder="Cents" [value]="noteCents">
+        <input matInput placeholder="Cents" [formControlName]="i">
       </mat-form-field>
-      <mat-slider class="flexCol flexGrow" min="0" [max]="scale.octaveCents" [value]="noteCents">
+      <mat-slider class="flexCol flexGrow" min="0" [max]="scale.octaveCents" [formControlName]="i" (change)="sliderChange($event)">
       </mat-slider>
+      {{form.controls.notesCents.controls[i].value}}
     </div>
 
     <div class="flexRow">

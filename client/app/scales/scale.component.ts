@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {FormGroup, FormControl, Validators} from "@angular/forms";
+import {FormGroup, FormArray, FormControl, Validators} from '@angular/forms';
 
 import {ScaleService} from './scale.service';
 import {Scale} from './Scale';
@@ -17,7 +17,8 @@ export class ScaleComponent implements OnInit {
   form = new FormGroup({
     name: new FormControl('', [
       Validators.required
-    ])
+    ]),
+    notesCents: new FormArray([new FormControl('', [])])
   });
 
   constructor(private scaleService: ScaleService,
@@ -45,15 +46,25 @@ export class ScaleComponent implements OnInit {
   }
 
   public async save() {
+    console.log(this.form.value);
     Object.assign(this.scale, this.form.value);
     const data = await this.scaleService.save(this.scale);
     this.afterLoad(data);
   }
 
   public addNote() {
-    const lastNote = this.scale.notesCents[this.scale.notesCents.length - 1];
-    this.scale.notesCents.push(lastNote);
+    const notes = this.form.get('notesCents') as FormArray;
+    notes.push(new FormControl('', []));
     this.form.markAsDirty();
+  }
+
+  public removeNote(i) {
+    const notes = this.form.get('notesCents') as FormArray;
+    notes.removeAt(i);
+  }
+
+  public sliderChange(event) {
+    console.log(this.form.value);
   }
 
 }
