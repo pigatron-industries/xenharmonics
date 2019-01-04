@@ -34,6 +34,7 @@ const routes = [
     RouterModule.forRoot(routes),
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     MatTabsModule,
     MatButtonModule,
     MatIconModule,

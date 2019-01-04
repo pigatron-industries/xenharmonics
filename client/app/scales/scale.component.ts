@@ -18,7 +18,7 @@ export class ScaleComponent implements OnInit {
     name: new FormControl('', [
       Validators.required
     ]),
-    notesCents: new FormArray([new FormControl('', [])])
+    notesCents: new FormArray([])
   });
 
   constructor(private scaleService: ScaleService,
@@ -28,7 +28,7 @@ export class ScaleComponent implements OnInit {
   async ngOnInit() {
     this.route.params.subscribe(params => {
       if (params['id'] === 'new') {
-        this.scale = new Scale();
+        this.afterLoad(new Scale());
       } else {
         this.load(params['id']);
       }
@@ -41,6 +41,10 @@ export class ScaleComponent implements OnInit {
 
   public afterLoad(data: Scale) {
     this.scale = data;
+    this.removeAllNotes();
+    for (let i = 0; i < this.scale.notesCents.length; i++) {
+      this.createNoteControl(this.scale.notesCents[i]);
+    }
     this.form.patchValue(data);
     this.form.markAsPristine();
   }
@@ -54,8 +58,24 @@ export class ScaleComponent implements OnInit {
 
   public addNote() {
     const notes = this.form.get('notesCents') as FormArray;
-    notes.push(new FormControl('', []));
+    const lastValue = notes.controls[notes.controls.length - 1].value;
+    this.createNoteControl(lastValue);
     this.form.markAsDirty();
+  }
+
+  private removeAllNotes() {
+    const notes = this.form.get('notesCents') as FormArray;
+    notes.controls = [];
+  }
+
+  private createNoteControl(value) {
+    const notes = this.form.get('notesCents') as FormArray;
+    const noteControl = new FormControl('', []);
+    noteControl.setValue(value);
+    noteControl.valueChanges.subscribe(e => {
+      noteControl.setValue(e, {emitEvent: false});
+    });
+    notes.push(noteControl);
   }
 
   public removeNote(i) {
