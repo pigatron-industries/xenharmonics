@@ -5,11 +5,15 @@ import * as fs from 'fs';
 
 import {config} from '../../config';
 import {MidiMessage} from './MidiMessage';
+import {MidiToControlVoltageService} from './MidiToControlVoltageService';
 
 @Service()
 export class MidiService implements OnInit {
 
   private midiStream: fs.ReadStream;
+
+  constructor(private midiToControlVoltageService: MidiToControlVoltageService) {
+  }
 
   async $onInit() {
     $log.info('Creating MIDI command listener');
@@ -42,7 +46,7 @@ export class MidiService implements OnInit {
       }
 
       if (message.command > 0) {
-        this.onMidiMessage(message);
+        this.midiToControlVoltageService.onMidiMessage(message);
       }
     }
   }
@@ -58,15 +62,6 @@ export class MidiService implements OnInit {
     return byte & 0x0F;
   }
   /* tslint:enable:no-bitwise */
-
-
-  private onMidiMessage(message: MidiMessage) {
-    if (message.command === MidiMessage.COMMAND_NOTE_ON) {
-      console.log('Note On, Channel ' + message.channel + ', Note ' + message.data1 + ', Velocity ' + message.data2);
-    } else if (message.command === MidiMessage.COMMAND_NOTE_OFF) {
-      console.log('Note Off, Channel ' + message.channel + ', Note ' + message.data1 + ', Velocity ' + message.data2);
-    }
-  }
 
 }
 

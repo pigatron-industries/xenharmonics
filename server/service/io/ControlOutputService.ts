@@ -34,6 +34,10 @@ export class ControlOutputService implements OnInit {
     return this.controlVoltages;
   }
 
+  public setVoltageOutput(newControlVoltage: ControlVoltageOutput) {
+    this.controlVoltages[newControlVoltage.channel].setVoltage(newControlVoltage.voltage);
+  }
+
   public send() {
     this.inputOutputSevice.dacShiftOut(this.controlVoltages);
     this.inputOutputSevice.dacLatch();
