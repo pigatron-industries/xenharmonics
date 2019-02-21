@@ -6,36 +6,52 @@ import {ScaleService} from './ScaleService';
 import {StorageService} from '../storage/StorageSevice';
 import {ChannelConfig} from '../../model/ChannelConfig';
 
+const CONFIG_KEY = 'xen_config';
+
 @Service()
 export class ApplicationStateService implements OnInit {
 
   private applicationState: ApplicationState;
 
-  constructor(private scaleService: ScaleService) {
+  constructor(private storageService: StorageService,
+              private scaleService: ScaleService) {
   }
 
   $onInit() {
-    this.createState();
+    this.loadState();
   }
 
-  async createState() {
-    if (!this.applicationState) {
-      $log.info('Creating initial application state');
-      this.applicationState = new ApplicationState();
+  private async loadState() {
+    const config = await this.storageService.load(CONFIG_KEY);
+    if (config) {
+      this.applicationState = config;
     } else {
-      return this.applicationState;
+      $log.info('Creating default application config');
+      this.applicationState = new ApplicationState();
+
+      const defaultConfig = new ChannelConfig();
+      defaultConfig.midiChannel = 0;
+      defaultConfig.noteVoltageChannel = 0;
+      defaultConfig.noteVoltageStart = 0;
+
+      this.applicationState.channelConfig.push(defaultConfig);
+      this.save();
     }
+  }
+
+  public save(): Promise<ApplicationState> {
+    return this.storageService.save(CONFIG_KEY, this.applicationState);
   }
 
   public async getState(): Promise<ApplicationState> {
     return this.applicationState;
   }
 
-  public async getSelectedScale(): Promise<Scale> {
+  public getSelectedScale(): Scale {
     return this.scaleService.findById(this.applicationState.selectedScale);
   }
 
-  public async setSelectedScale(scaleId: number): Promise<Scale> {
+  public setSelectedScale(scaleId: number): Scale {
     this.applicationState.selectedScale = scaleId;
     return this.getSelectedScale();
   }

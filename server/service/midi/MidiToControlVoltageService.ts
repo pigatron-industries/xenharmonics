@@ -4,7 +4,7 @@ import {MidiMessage} from './MidiMessage';
 import {ApplicationStateService} from '../app/ApplicationStateService';
 import {ControlOutputService} from '../io/ControlOutputService';
 import {ControlVoltageOutput} from '../../model/ControlVoltageOutput';
-import {ChannelConfig} from "../../model/ChannelConfig";
+import {ChannelConfig} from '../../model/ChannelConfig';
 
 @Service()
 export class MidiToControlVoltageService {
@@ -28,12 +28,14 @@ export class MidiToControlVoltageService {
     if (channelConfig) {
 
       if (channelConfig.noteVoltageChannel != null) {
-        const noteVoltage = new ControlVoltageOutput(channelConfig.noteVoltageChannel, this.midiNoteToVoltage(message.data1));
+        const noteVoltage = new ControlVoltageOutput(channelConfig.noteVoltageChannel,
+                                                     this.midiNoteToVoltage(message.data1, channelConfig));
         this.controlOutputService.setVoltageOutput(noteVoltage);
       }
 
       if (channelConfig.pressureVoltageChannel != null) {
-        const noteVoltage = new ControlVoltageOutput(channelConfig.pressureVoltageChannel, this.midiVelocityToVoltage(message.data1));
+        const noteVoltage = new ControlVoltageOutput(channelConfig.pressureVoltageChannel,
+                                                     this.midiVelocityToVoltage(message.data1));
         this.controlOutputService.setVoltageOutput(noteVoltage);
       }
 
@@ -58,10 +60,12 @@ export class MidiToControlVoltageService {
   }
 
 
-  private midiNoteToVoltage(note: number): number {
+  private midiNoteToVoltage(midiNote: number, channelConfig: ChannelConfig): number {
     const scale = this.applicationStateService.getSelectedScale();
-    // TODO convert midi note number to voltage using current scale
-    return 0;
+    const octave = midiNote % scale.notesCents.length;
+    const note = midiNote - octave * scale.notesCents.length;
+    const cents = octave * scale.octaveCents + scale.notesCents[note];
+    return cents / 12;
   }
 
 

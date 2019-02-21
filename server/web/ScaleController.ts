@@ -15,23 +15,23 @@ export class ScaleController {
   }
 
   @Get('/')
-  async getAll(): Promise<Scale[]> {
+  getAll(): Scale[] {
     return this.scaleService.getAll();
   }
 
   @Get('/selected')
-  async getSelected(): Promise<Scale> {
-    return await this.applicationStateService.getSelectedScale();
+  getSelected(): Scale {
+    return this.applicationStateService.getSelectedScale();
   }
 
   @Put('/selected/:id')
-  async setSelected(@Required() @PathParams('id') id: number): Promise<Scale> {
-    return await this.applicationStateService.setSelectedScale(id);
+  setSelected(@Required() @PathParams('id') id: number): Scale {
+    return this.applicationStateService.setSelectedScale(id);
   }
 
   @Get('/:id')
-  async findById(@Required() @PathParams('id') id: number): Promise<Scale> {
-    const scale = await this.scaleService.findById(id);
+  findById(@Required() @PathParams('id') id: number): Scale {
+    const scale = this.scaleService.findById(id);
     if (scale) {
       return scale;
     }

@@ -27,7 +27,7 @@ export class ScaleService implements OnInit {
     this.storageService.save(SCALES_KEY, this.scales);
   }
 
-  async getAll(): Promise<Scale[]> {
+  getAll(): Scale[] {
     return this.scales;
   }
 
