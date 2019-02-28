@@ -43,7 +43,7 @@ export class ApplicationStateService implements OnInit {
     this.storageService.save(CONFIG_KEY, this.applicationState);
   }
 
-  public async getState(): Promise<ApplicationState> {
+  public getState(): ApplicationState {
     return this.applicationState;
   }
 
