@@ -1,4 +1,6 @@
 import {Service, OnInit} from '@tsed/common';
+import {$log} from 'ts-log-debug';
+
 import {Scale} from '../../model/Scale';
 import {StorageService} from '../storage/StorageSevice';
 
@@ -20,6 +22,14 @@ export class ScaleService implements OnInit {
     const scales = await this.storageService.load(SCALES_KEY);
     if (scales) {
       this.scales = scales;
+    } else {
+      $log.info('Creating default scale');
+      const defaultScale = new Scale();
+      defaultScale.name = '12tet';
+      defaultScale.description = '12-Tone Equal Temperament';
+      defaultScale.notesCents = [0, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100];
+      defaultScale.octaveCents = 1200;
+      this.saveScales();
     }
   }
 

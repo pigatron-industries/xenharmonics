@@ -53,11 +53,17 @@ export class ApplicationStateService implements OnInit {
 
   public setSelectedScale(scaleId: number): Scale {
     this.applicationState.selectedScale = scaleId;
+    this.save();
     return this.getSelectedScale();
   }
 
   public getChannelConfig(channel: number): ChannelConfig {
     return this.applicationState.channelConfig[channel];
+  }
+
+  public setChannelConfig(channelConfig: ChannelConfig[]) {
+    this.applicationState.channelConfig = channelConfig;
+    this.save();
   }
 
 }
