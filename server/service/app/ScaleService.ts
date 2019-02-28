@@ -25,6 +25,7 @@ export class ScaleService implements OnInit {
     } else {
       $log.info('Creating default scale');
       const defaultScale = new Scale();
+      defaultScale.id = await this.storageService.createId();
       defaultScale.name = '12tet';
       defaultScale.description = '12-Tone Equal Temperament';
       defaultScale.notesCents = [0, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100];
