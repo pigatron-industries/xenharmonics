@@ -57,13 +57,18 @@ export class ConfigService implements OnInit {
     return this.getSelectedScale();
   }
 
+  public getChannelConfigs(): ChannelConfig[] {
+    return this.applicationConfig.channelConfig;
+  }
+
   public getChannelConfig(channel: number): ChannelConfig {
     return this.applicationConfig.channelConfig[channel];
   }
 
-  public setChannelConfig(channelConfig: ChannelConfig[]) {
+  public setChannelConfig(channelConfig: ChannelConfig[]): ChannelConfig[] {
     this.applicationConfig.channelConfig = channelConfig;
     this.save();
+    return this.applicationConfig.channelConfig;
   }
 
 }

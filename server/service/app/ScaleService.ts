@@ -30,6 +30,7 @@ export class ScaleService implements OnInit {
       defaultScale.description = '12-Tone Equal Temperament';
       defaultScale.notesCents = [0, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100];
       defaultScale.octaveCents = 1200;
+      this.scales.push(defaultScale);
       this.saveScales();
     }
   }
