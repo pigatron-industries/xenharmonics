@@ -1,7 +1,7 @@
 
 import {ChannelConfig} from './ChannelConfig';
 
-export class ApplicationState {
+export class ApplicationConfig {
 
   selectedScale: number;
   channelConfig: ChannelConfig[];

@@ -1,6 +1,6 @@
 import {OnInit, Service} from '@tsed/common';
 import {$log} from 'ts-log-debug';
-import {ApplicationState} from '../../model/ApplicationState';
+import {ApplicationConfig} from '../../model/ApplicationConfig';
 import {Scale} from '../../model/Scale';
 import {ScaleService} from './ScaleService';
 import {StorageService} from '../storage/StorageSevice';
@@ -11,7 +11,7 @@ const CONFIG_KEY = 'xen_config';
 @Service()
 export class ConfigService implements OnInit {
 
-  private applicationState: ApplicationState;
+  private applicationConfig: ApplicationConfig;
 
   constructor(private storageService: StorageService,
               private scaleService: ScaleService) {
@@ -24,45 +24,45 @@ export class ConfigService implements OnInit {
   private async loadState() {
     const config = await this.storageService.load(CONFIG_KEY);
     if (config) {
-      this.applicationState = config;
+      this.applicationConfig = config;
     } else {
       $log.info('Creating default application config');
-      this.applicationState = new ApplicationState();
+      this.applicationConfig = new ApplicationConfig();
 
       const defaultConfig = new ChannelConfig();
       defaultConfig.midiChannel = 0;
       defaultConfig.noteVoltageChannel = 0;
       defaultConfig.noteVoltageStart = 0;
 
-      this.applicationState.channelConfig.push(defaultConfig);
+      this.applicationConfig.channelConfig.push(defaultConfig);
       this.save();
     }
   }
 
   public save() {
-    this.storageService.save(CONFIG_KEY, this.applicationState);
+    this.storageService.save(CONFIG_KEY, this.applicationConfig);
   }
 
-  public getState(): ApplicationState {
-    return this.applicationState;
+  public getConfig(): ApplicationConfig {
+    return this.applicationConfig;
   }
 
   public getSelectedScale(): Scale {
-    return this.scaleService.findById(this.applicationState.selectedScale);
+    return this.scaleService.findById(this.applicationConfig.selectedScale);
   }
 
   public setSelectedScale(scaleId: number): Scale {
-    this.applicationState.selectedScale = scaleId;
+    this.applicationConfig.selectedScale = scaleId;
     this.save();
     return this.getSelectedScale();
   }
 
   public getChannelConfig(channel: number): ChannelConfig {
-    return this.applicationState.channelConfig[channel];
+    return this.applicationConfig.channelConfig[channel];
   }
 
   public setChannelConfig(channelConfig: ChannelConfig[]) {
-    this.applicationState.channelConfig = channelConfig;
+    this.applicationConfig.channelConfig = channelConfig;
     this.save();
   }
 
