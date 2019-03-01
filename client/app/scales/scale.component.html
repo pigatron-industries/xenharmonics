@@ -1,4 +1,4 @@
-<form *ngIf="scale!==null" [formGroup]="form" (ngSubmit)="save()">
+<form class="flexCol flexGrow" *ngIf="scale!==null" [formGroup]="form" (ngSubmit)="save()">
 
   <mat-toolbar>
     <div class="buttons-bar" fxflex>
@@ -12,34 +12,43 @@
     </div>
   </mat-toolbar>
 
-  <div class="contentWrapper flexCol">
+  <div class="contentWrapper flexCol flexGrow">
+    <div>
 
-    <mat-form-field>
-      <input matInput placeholder="Name"
-             formControlName="name">
-      <mat-error *ngIf="form.controls.name.hasError('required')">
-        Name is required
-      </mat-error>
-    </mat-form-field>
-
-    <div class="flexRow" formArrayName="notesCents" *ngFor="let note of form.get('notesCents').controls; let i = index;">
-      <button type="button" mat-mini-fab matTooltip="Remove Note" (click)="removeNote(i)">
-        <mat-icon aria-label="Add Note">remove_circle</mat-icon>
-      </button>
-      <mat-form-field class="flexCol">
-        <input matInput placeholder="Cents" [formControlName]="i">
+      <mat-form-field>
+        <input matInput placeholder="Name"
+               formControlName="name">
+        <mat-error *ngIf="form.controls.name.hasError('required')">
+          Name is required
+        </mat-error>
       </mat-form-field>
-      <mat-slider class="flexCol flexGrow" min="0" [max]="scale.octaveCents" [formControlName]="i" (change)="sliderChange($event)">
-      </mat-slider>
-      {{form.controls.notesCents.controls[i].value}}
-    </div>
 
-    <div class="flexRow">
-      <button type="button" mat-mini-fab matTooltip="Add Note" (click)="addNote()">
-        <mat-icon aria-label="Add Note">add_box</mat-icon>
-      </button>
-    </div>
+      <div class="flexRow" formArrayName="notesCents" *ngFor="let note of form.get('notesCents').controls; let i = index;">
+        <button type="button" mat-mini-fab matTooltip="Remove Note" (click)="removeNote(i)">
+          <mat-icon aria-label="Add Note">remove_circle</mat-icon>
+        </button>
+        <mat-form-field class="flexCol">
+          <input matInput placeholder="Cents" [formControlName]="i">
+        </mat-form-field>
+        <mat-slider class="flexCol flexGrow" min="0" [max]="scale.octaveCents" [formControlName]="i" (change)="sliderChange($event)">
+        </mat-slider>
+      </div>
 
+      <div class="flexRow">
+        <button type="button" mat-mini-fab matTooltip="Add Note" (click)="addNote()">
+          <mat-icon aria-label="Add Note">add_box</mat-icon>
+        </button>
+      </div>
+
+      <mat-form-field>
+        <input matInput placeholder="Octave Cents"
+               formControlName="octaveCents">
+        <mat-error *ngIf="form.controls.octaveCents.hasError('required')">
+          Octave Cents are required
+        </mat-error>
+      </mat-form-field>
+
+    </div>
   </div>
 
 </form>

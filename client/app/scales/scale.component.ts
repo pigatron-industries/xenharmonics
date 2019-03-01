@@ -18,6 +18,9 @@ export class ScaleComponent implements OnInit {
     name: new FormControl('', [
       Validators.required
     ]),
+    octaveCents: new FormControl('', [
+      Validators.required
+    ]),
     notesCents: new FormArray([])
   });
 
