@@ -9,7 +9,7 @@ import {ChannelConfig} from '../../model/ChannelConfig';
 const CONFIG_KEY = 'xen_config';
 
 @Service()
-export class ApplicationStateService implements OnInit {
+export class ConfigService implements OnInit {
 
   private applicationState: ApplicationState;
 

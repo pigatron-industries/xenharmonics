@@ -6,7 +6,6 @@ import * as fs from 'fs';
 import {config} from '../../config';
 import {MidiMessage} from './MidiMessage';
 import {MidiToControlVoltageService} from './MidiToControlVoltageService';
-import {ApplicationStateService} from '../app/ApplicationStateService';
 
 @Service()
 export class MidiService implements OnInit {

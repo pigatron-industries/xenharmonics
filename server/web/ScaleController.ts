@@ -4,14 +4,14 @@ import {
 import {Scale} from '../model/Scale';
 import {ScaleService} from '../service/app/ScaleService';
 import {NotFound} from 'ts-httpexceptions';
-import {ApplicationStateService} from '../service/app/ApplicationStateService';
+import {ConfigService} from '../service/app/ConfigService';
 
 
 @Controller('/scale')
 export class ScaleController {
 
   constructor(private scaleService: ScaleService,
-              private applicationStateService: ApplicationStateService) {
+              private configService: ConfigService) {
   }
 
   @Get('/')
@@ -21,12 +21,12 @@ export class ScaleController {
 
   @Get('/selected')
   getSelected(): Scale {
-    return this.applicationStateService.getSelectedScale();
+    return this.configService.getSelectedScale();
   }
 
   @Put('/selected/:id')
   setSelected(@Required() @PathParams('id') id: number): Scale {
-    return this.applicationStateService.setSelectedScale(id);
+    return this.configService.setSelectedScale(id);
   }
 
   @Get('/:id')

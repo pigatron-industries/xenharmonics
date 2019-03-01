@@ -1,7 +1,7 @@
 
 import {Service} from '@tsed/common';
 import {MidiMessage} from './MidiMessage';
-import {ApplicationStateService} from '../app/ApplicationStateService';
+import {ConfigService} from '../app/ConfigService';
 import {ControlOutputService} from '../io/ControlOutputService';
 import {ControlVoltageOutput} from '../../model/ControlVoltageOutput';
 import {ChannelConfig} from '../../model/ChannelConfig';
@@ -9,7 +9,7 @@ import {ChannelConfig} from '../../model/ChannelConfig';
 @Service()
 export class MidiToControlVoltageService {
 
-  constructor(private applicationStateService: ApplicationStateService,
+  constructor(private configService: ConfigService,
               private controlOutputService: ControlOutputService) {
   }
 
@@ -24,7 +24,7 @@ export class MidiToControlVoltageService {
 
   private handleNoteOn(message: MidiMessage) {
     console.log('Note On, Channel ' + message.channel + ', Note ' + message.data1 + ', Velocity ' + message.data2);
-    const channelConfig = this.applicationStateService.getChannelConfig(message.channel);
+    const channelConfig = this.configService.getChannelConfig(message.channel);
     if (channelConfig) {
 
       if (channelConfig.noteVoltageChannel != null) {
@@ -49,7 +49,7 @@ export class MidiToControlVoltageService {
 
   private handleNoteOff(message: MidiMessage) {
     console.log('Note Off, Channel ' + message.channel + ', Note ' + message.data1 + ', Velocity ' + message.data2);
-    const channelConfig = this.applicationStateService.getChannelConfig(message.channel);
+    const channelConfig = this.configService.getChannelConfig(message.channel);
     if (channelConfig) {
 
       if (channelConfig.gateChannel != null) {
@@ -61,7 +61,7 @@ export class MidiToControlVoltageService {
 
 
   private midiNoteToVoltage(midiNote: number, channelConfig: ChannelConfig): number {
-    const scale = this.applicationStateService.getSelectedScale();
+    const scale = this.configService.getSelectedScale();
     const octave = midiNote % scale.notesCents.length;
     const note = midiNote - octave * scale.notesCents.length;
     const cents = octave * scale.octaveCents + scale.notesCents[note];
