@@ -6,6 +6,7 @@ import * as fs from 'fs';
 import {config} from '../../config';
 import {MidiMessage} from './MidiMessage';
 import {MidiToControlVoltageService} from './MidiToControlVoltageService';
+import {ApplicationStateService} from '../app/ApplicationStateService';
 
 @Service()
 export class MidiService implements OnInit {
@@ -19,9 +20,11 @@ export class MidiService implements OnInit {
     $log.info('Creating MIDI command listener');
     this.midiStream = fs.createReadStream(config.midiDevice);
     const that = this;
-    this.midiStream.on('data', (data) => {
-      that.onMidiStreamData(data);
-    });
+    setTimeout(function() {
+      that.midiStream.on('data', (data) => {
+        that.onMidiStreamData(data);
+      });
+    }, 1000);
   }
 
   private onMidiStreamData(data: Buffer) {
