@@ -45,10 +45,10 @@ export class ControlOutputService implements OnInit {
     return this.controlVoltages;
   }
 
-  public setVoltageOutput(newControlVoltage: ControlVoltageOutput) {
-    $log.debug(newControlVoltage);
-    this.controlVoltages[newControlVoltage.channel].setVoltage(newControlVoltage.voltage);
+  public setVoltageOutput(channel: number, voltage: number) {
+    this.controlVoltages[channel].setVoltage(voltage);
     this.controlVoltagesDirty = true;
+    $log.debug(this.controlVoltages[channel]);
   }
 
   public getGateOutputs(): GateOutput[] {

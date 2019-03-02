@@ -31,15 +31,13 @@ export class MidiToControlVoltageService {
     if (channelConfig) {
 
       if (channelConfig.noteVoltageChannel != null) {
-        const noteVoltage = new ControlVoltageOutput(channelConfig.noteVoltageChannel,
-                                                     this.midiNoteToVoltage(message.data1, channelConfig));
-        this.controlOutputService.setVoltageOutput(noteVoltage);
+        this.controlOutputService.setVoltageOutput(channelConfig.noteVoltageChannel,
+                                                   this.midiNoteToVoltage(message.data1, channelConfig));
       }
 
       if (channelConfig.pressureVoltageChannel != null) {
-        const noteVoltage = new ControlVoltageOutput(channelConfig.pressureVoltageChannel,
-                                                     this.midiVelocityToVoltage(message.data1));
-        this.controlOutputService.setVoltageOutput(noteVoltage);
+        this.controlOutputService.setVoltageOutput(channelConfig.pressureVoltageChannel,
+                                                   this.midiVelocityToVoltage(message.data1));
       }
 
       if (channelConfig.gateChannel != null) {
