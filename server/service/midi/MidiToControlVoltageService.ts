@@ -69,10 +69,10 @@ export class MidiToControlVoltageService {
 
   private midiNoteToVoltage(midiNote: number, channelConfig: ChannelConfig): number {
     const scale = this.configService.getSelectedScale();
-    const octave = midiNote % scale.notesCents.length;
+    const octave = Math.round(midiNote / scale.notesCents.length);
     const note = midiNote - octave * scale.notesCents.length;
     const cents = octave * scale.octaveCents + scale.notesCents[note];
-    return cents / 12;
+    return cents / 1200;
   }
 
 
