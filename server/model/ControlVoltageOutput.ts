@@ -21,17 +21,27 @@ export class ControlVoltageOutput {
   @Description('Voltage in volts')
   voltage: number;
 
+  @Description('Previous voltage before bending')
+  initialVoltage: number;
+
   @IgnoreProperty()
   intValue: number;
 
   constructor(channel: number, voltage: number) {
     this.channel = channel;
     this.voltage = voltage;
+    this.initialVoltage = voltage;
     this.calcIntValue();
   }
 
   public setVoltage(voltage: number) {
     this.voltage = voltage;
+    this.initialVoltage = voltage;
+    this.calcIntValue();
+  }
+
+  public bendVoltage(voltageBend: number) {
+    this.voltage = this.initialVoltage + voltageBend;
     this.calcIntValue();
   }
 

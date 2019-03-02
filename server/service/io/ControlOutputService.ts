@@ -51,6 +51,12 @@ export class ControlOutputService implements OnInit {
     $log.debug(this.controlVoltages[channel]);
   }
 
+  public bendVoltageOutput(channel: number, voltage: number) {
+    this.controlVoltages[channel].bendVoltage(voltage);
+    this.controlVoltagesDirty = true;
+    $log.debug(this.controlVoltages[channel]);
+  }
+
   public getGateOutputs(): GateOutput[] {
     return this.gates;
   }

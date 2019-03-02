@@ -5,7 +5,6 @@ import {$log} from 'ts-log-debug';
 import {MidiMessage} from './MidiMessage';
 import {ConfigService} from '../app/ConfigService';
 import {ControlOutputService} from '../io/ControlOutputService';
-import {ControlVoltageOutput} from '../../model/ControlVoltageOutput';
 import {ChannelConfig} from '../../model/ChannelConfig';
 import {GateOutput} from '../../model/GateOutput';
 
@@ -22,6 +21,8 @@ export class MidiToControlVoltageService {
       this.handleNoteOn(message);
     } else if (message.command === MidiMessage.COMMAND_NOTE_OFF) {
       this.handleNoteOff(message);
+    } else if (message.command === MidiMessage.COMMAND_PITCH_BEND) {
+      this.handlePitchBend(message);
     }
   }
 
@@ -46,7 +47,6 @@ export class MidiToControlVoltageService {
       }
 
       this.controlOutputService.send();
-
     }
   }
 
@@ -54,14 +54,24 @@ export class MidiToControlVoltageService {
   private handleNoteOff(message: MidiMessage) {
     const channelConfig = this.configService.getChannelConfig(message.channel);
     if (channelConfig) {
-
       if (channelConfig.gateChannel != null) {
         const gate = new GateOutput(channelConfig.gateChannel, false);
         this.controlOutputService.setGateOutput(gate);
       }
 
       this.controlOutputService.send();
+    }
+  }
 
+  private handlePitchBend(message: MidiMessage) {
+    const channelConfig = this.configService.getChannelConfig(message.channel);
+    if (channelConfig) {
+      if (channelConfig.noteVoltageChannel != null) {
+        this.controlOutputService.bendVoltageOutput(channelConfig.noteVoltageChannel,
+                                                    this.midiPitchBendToVoltage(message));
+      }
+
+      this.controlOutputService.send();
     }
   }
 
@@ -74,6 +84,12 @@ export class MidiToControlVoltageService {
     return cents / 1200;
   }
 
+  /* tslint:disable:no-bitwise */
+  private midiPitchBendToVoltage(message: MidiMessage): number {
+    const value = (message.data2 << 8) | (message.data1 && 0xFF);
+    return ((value - 8192) / 8192) / 12; // +/- 1/12th of an octave
+  }
+  /* tslint:enable:no-bitwise */
 
   private midiVelocityToVoltage(note: number): number {
     // TODO convert midi velocity to voltage
