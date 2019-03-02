@@ -11,23 +11,22 @@ export class NoOpInputOutputService implements InputOutputServiceInterface {
   }
 
   public setPinMode(pin: number, mode: PinMode) {
-    $log.info('setPinMode ' + pin + ' ' + mode);
+    $log.debug('setPinMode ' + pin + ' ' + mode);
   }
 
   digitalWrite(pin: number, state: boolean) {
-    $log.info('digitalWrite ' + pin + ' ' + state);
+    $log.debug('digitalWrite ' + pin + ' ' + state);
   }
 
   public shiftOut(dataPin: number, clockPin: number, order: ByteOrder, value: number) {
-    $log.info('shiftOut ' + dataPin + ' ' + clockPin + ' ' + order + ' ' + value);
+    $log.debug('shiftOut ' + dataPin + ' ' + clockPin + ' ' + order + ' ' + value);
   }
 
   /* tslint:disable:no-bitwise */
   public shiftOut16(dataPin: number, clockPin: number, value: number) {
-    $log.info('shiftOut16');
+    $log.debug('shiftOut16');
     for (let i = 15; i >= 0; i--) {
       const bit = value & (1 << i) ? 1 : 0;
-      $log.info(bit);
     }
   }
   /* tslint:enable:no-bitwise */

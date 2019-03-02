@@ -1,5 +1,7 @@
 
 import {Service} from '@tsed/common';
+import {$log} from 'ts-log-debug';
+
 import {MidiMessage} from './MidiMessage';
 import {ConfigService} from '../app/ConfigService';
 import {ControlOutputService} from '../io/ControlOutputService';
@@ -15,6 +17,7 @@ export class MidiToControlVoltageService {
   }
 
   public onMidiMessage(message: MidiMessage) {
+    $log.debug(message);
     if (message.command === MidiMessage.COMMAND_NOTE_ON) {
       this.handleNoteOn(message);
     } else if (message.command === MidiMessage.COMMAND_NOTE_OFF) {
@@ -24,14 +27,12 @@ export class MidiToControlVoltageService {
 
 
   private handleNoteOn(message: MidiMessage) {
-    console.log('Note On, Channel ' + message.channel + ', Note ' + message.data1 + ', Velocity ' + message.data2);
     const channelConfig = this.configService.getChannelConfig(message.channel);
     if (channelConfig) {
 
       if (channelConfig.noteVoltageChannel != null) {
         const noteVoltage = new ControlVoltageOutput(channelConfig.noteVoltageChannel,
                                                      this.midiNoteToVoltage(message.data1, channelConfig));
-        console.log(noteVoltage);
         this.controlOutputService.setVoltageOutput(noteVoltage);
       }
 
@@ -53,7 +54,6 @@ export class MidiToControlVoltageService {
 
 
   private handleNoteOff(message: MidiMessage) {
-    console.log('Note Off, Channel ' + message.channel + ', Note ' + message.data1 + ', Velocity ' + message.data2);
     const channelConfig = this.configService.getChannelConfig(message.channel);
     if (channelConfig) {
 

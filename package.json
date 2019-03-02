@@ -11,7 +11,8 @@
     "buildClient": "ng build",
     "buildServer": "./node_modules/typescript/bin/tsc -p server",
     "build": "npm run buildClient && npm run buildServer",
-    "start": "node ./dist/server/index.js"
+    "start": "node ./dist/server/index.js",
+    "debug": "node ./dist/server/index.js debug"
   },
   "private": true,
   "dependencies": {

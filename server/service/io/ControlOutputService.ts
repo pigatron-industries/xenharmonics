@@ -1,7 +1,8 @@
 import {OnInit, Service} from '@tsed/common';
+import {$log} from 'ts-log-debug';
+
 import {ControlVoltageOutput} from '../../model/ControlVoltageOutput';
 import {InputOutputService} from './InputOutputService';
-
 import {config} from '../../config';
 import {GateOutput} from '../../model/GateOutput';
 
@@ -45,6 +46,7 @@ export class ControlOutputService implements OnInit {
   }
 
   public setVoltageOutput(newControlVoltage: ControlVoltageOutput) {
+    $log.debug(newControlVoltage);
     this.controlVoltages[newControlVoltage.channel].setVoltage(newControlVoltage.voltage);
     this.controlVoltagesDirty = true;
   }
