@@ -31,6 +31,7 @@ export class MidiToControlVoltageService {
       if (channelConfig.noteVoltageChannel != null) {
         const noteVoltage = new ControlVoltageOutput(channelConfig.noteVoltageChannel,
                                                      this.midiNoteToVoltage(message.data1, channelConfig));
+        console.log(noteVoltage);
         this.controlOutputService.setVoltageOutput(noteVoltage);
       }
 
