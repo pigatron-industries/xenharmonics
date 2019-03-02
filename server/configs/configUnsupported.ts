@@ -8,5 +8,5 @@ export const config = {
   gateClockPin: 4,
   gateDataPin: 5,
   gateLatchPin: 6,
-  gateOutputChannels: 0
+  gateOutputChannels: 8
 };

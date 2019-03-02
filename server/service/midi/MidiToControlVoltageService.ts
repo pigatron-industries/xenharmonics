@@ -5,6 +5,7 @@ import {ConfigService} from '../app/ConfigService';
 import {ControlOutputService} from '../io/ControlOutputService';
 import {ControlVoltageOutput} from '../../model/ControlVoltageOutput';
 import {ChannelConfig} from '../../model/ChannelConfig';
+import {GateOutput} from '../../model/GateOutput';
 
 @Service()
 export class MidiToControlVoltageService {
@@ -40,8 +41,11 @@ export class MidiToControlVoltageService {
       }
 
       if (channelConfig.gateChannel != null) {
-        // TODO turn gate on
+        const gate = new GateOutput(channelConfig.gateChannel, true);
+        this.controlOutputService.setGateOutput(gate);
       }
+
+      this.controlOutputService.send();
 
     }
   }
@@ -53,8 +57,11 @@ export class MidiToControlVoltageService {
     if (channelConfig) {
 
       if (channelConfig.gateChannel != null) {
-        // TODO turn gate off
+        const gate = new GateOutput(channelConfig.gateChannel, false);
+        this.controlOutputService.setGateOutput(gate);
       }
+
+      this.controlOutputService.send();
 
     }
   }
