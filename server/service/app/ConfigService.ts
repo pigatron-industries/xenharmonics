@@ -28,13 +28,14 @@ export class ConfigService implements OnInit {
     } else {
       $log.info('Creating default application config');
       this.applicationConfig = new ApplicationConfig();
+      this.applicationConfig.selectedScale = 1;
 
-      const defaultConfig = new ChannelConfig();
-      defaultConfig.midiChannel = 0;
-      defaultConfig.noteVoltageChannel = 0;
-      defaultConfig.noteVoltageStart = 0;
+      const defaultChannelConfig = new ChannelConfig();
+      defaultChannelConfig.midiChannel = 0;
+      defaultChannelConfig.noteVoltageChannel = 0;
+      defaultChannelConfig.noteVoltageStart = 0;
 
-      this.applicationConfig.channelConfig.push(defaultConfig);
+      this.applicationConfig.channelConfig.push(defaultChannelConfig);
       this.save();
     }
   }
