@@ -26,6 +26,7 @@ export class ControlOutputService implements OnInit {
     for (let i = 0; i < config.dacOutputChannels; i++) {
       this.controlVoltages.push(new ControlVoltageOutput(i, 0));
     }
+    this.gates = [];
     for (let i = 0; i < config.gateOutputChannels; i++) {
       this.gates.push(new GateOutput(i, false));
     }
