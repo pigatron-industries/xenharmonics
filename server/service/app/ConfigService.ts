@@ -34,6 +34,7 @@ export class ConfigService implements OnInit {
       defaultChannelConfig.midiChannel = 0;
       defaultChannelConfig.noteVoltageChannel = 0;
       defaultChannelConfig.noteVoltageStart = 0;
+      defaultChannelConfig.gateChannel = 0;
 
       this.applicationConfig.channelConfig.push(defaultChannelConfig);
       this.save();
