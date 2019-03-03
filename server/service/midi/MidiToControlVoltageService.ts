@@ -84,12 +84,10 @@ export class MidiToControlVoltageService {
     return cents / 1200;
   }
 
-  /* tslint:disable:no-bitwise */
   private midiPitchBendToVoltage(message: MidiMessage): number {
-    const value = (message.data2 << 8) | (message.data1 && 0xFF);
+    const value = (message.data2 * 128) + message.data1;
     return ((value - 8192) / 8192) / 12; // +/- 1/12th of an octave
   }
-  /* tslint:enable:no-bitwise */
 
   private midiVelocityToVoltage(note: number): number {
     // TODO convert midi velocity to voltage
