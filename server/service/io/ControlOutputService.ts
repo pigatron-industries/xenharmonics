@@ -72,6 +72,7 @@ export class ControlOutputService implements OnInit {
   public setGateOutput(gate: GateOutput) {
     this.gates[gate.channel].setValue(gate.value);
     this.gatesDirty = true;
+    $log.debug(this.gates[gate.channel]);
   }
 
 
