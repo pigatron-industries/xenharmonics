@@ -40,7 +40,7 @@ export class InputOutputService implements OnInit {
   }
 
   public dacShiftOut(controlVoltages: ControlVoltageOutput[]) {
-    for (let i = 0, len = controlVoltages.length; i < len; i++) {
+    for (let i = controlVoltages.length - 1; i >= 0; i--) {
       const controlVoltage = controlVoltages[i];
       // Using native shiftOut is too fast for DAC!!!
       // const bytes: number[] = controlVoltage.getBytes();
@@ -57,7 +57,7 @@ export class InputOutputService implements OnInit {
   }
 
   public gateShiftOut(gateOutputs: GateOutput[]) {
-    for (let i = 0, len = gateOutputs.length; i < len; i++) {
+    for (let i = gateOutputs.length - 1; i >= 0; i--) {
       const gateOutput = gateOutputs[i];
       this.io.digitalWrite(config.gateDataPin, gateOutput.value);
       this.io.digitalWrite(config.gateClockPin, true);
