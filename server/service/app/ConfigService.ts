@@ -43,14 +43,14 @@ export class ConfigService implements OnInit {
       const defaultChannelConfig = new ChannelConfig();
       defaultChannelConfig.midiChannel = i;
 
-      if (hwConfig.dacOutputChannels <= i) {
+      if (i <= hwConfig.dacOutputChannels) {
         defaultChannelConfig.noteVoltageChannel = i;
       } else {
         defaultChannelConfig.noteVoltageChannel = null;
       }
       defaultChannelConfig.noteVoltageStart = 0;
 
-      if (hwConfig.gateOutputChannels <= i) {
+      if (i <= hwConfig.gateOutputChannels) {
         defaultChannelConfig.gateChannel = i;
       } else {
         defaultChannelConfig.gateChannel = null;
