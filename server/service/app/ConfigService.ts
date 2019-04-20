@@ -30,15 +30,22 @@ export class ConfigService implements OnInit {
       this.applicationConfig = new ApplicationConfig();
       this.applicationConfig.selectedScale = 1;
 
-      const defaultChannelConfig = new ChannelConfig();
-      defaultChannelConfig.midiChannel = 0;
-      defaultChannelConfig.noteVoltageChannel = 0;
-      defaultChannelConfig.noteVoltageStart = 0;
-      defaultChannelConfig.gateChannel = 0;
-
-      this.applicationConfig.channelConfig.push(defaultChannelConfig);
-      this.save();
+      this.defaultChannelConfig();
     }
+  }
+
+  public defaultChannelConfig() {
+      // default to 8 midi channels mapped to same output channels
+      for (let i = 0; i < 8; i++) {
+          const defaultChannelConfig = new ChannelConfig();
+          defaultChannelConfig.midiChannel = i;
+          defaultChannelConfig.noteVoltageChannel = i;
+          defaultChannelConfig.noteVoltageStart = 0;
+          defaultChannelConfig.gateChannel = i;
+          this.applicationConfig.channelConfig.push(defaultChannelConfig);
+      }
+
+      this.save();
   }
 
   public save() {
