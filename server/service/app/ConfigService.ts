@@ -5,6 +5,7 @@ import {Scale} from '../../model/Scale';
 import {ScaleService} from './ScaleService';
 import {StorageService} from '../storage/StorageSevice';
 import {ChannelConfig} from '../../model/ChannelConfig';
+import {config as hwConfig} from '../../config';
 
 const CONFIG_KEY = 'xen_config';
 
@@ -35,17 +36,29 @@ export class ConfigService implements OnInit {
   }
 
   public defaultChannelConfig() {
-      // default to 8 midi channels mapped to same output channels
-      for (let i = 0; i < 8; i++) {
-          const defaultChannelConfig = new ChannelConfig();
-          defaultChannelConfig.midiChannel = i;
-          defaultChannelConfig.noteVoltageChannel = i;
-          defaultChannelConfig.noteVoltageStart = 0;
-          defaultChannelConfig.gateChannel = i;
-          this.applicationConfig.channelConfig.push(defaultChannelConfig);
-      }
+    // default to 8 midi channels mapped to same output channels
+    const maxChannels = hwConfig.gateOutputChannels;
 
-      this.save();
+    for (let i = 0; i < maxChannels; i++) {
+      const defaultChannelConfig = new ChannelConfig();
+      defaultChannelConfig.midiChannel = i;
+
+      if (hwConfig.dacOutputChannels <= i) {
+        defaultChannelConfig.noteVoltageChannel = i;
+      } else {
+        defaultChannelConfig.noteVoltageChannel = null;
+      }
+      defaultChannelConfig.noteVoltageStart = 0;
+
+      if (hwConfig.gateOutputChannels <= i) {
+        defaultChannelConfig.gateChannel = i;
+      } else {
+        defaultChannelConfig.gateChannel = null;
+      }
+      this.applicationConfig.channelConfig.push(defaultChannelConfig);
+    }
+
+    this.save();
   }
 
   public save() {
