@@ -23,6 +23,10 @@ export class MidiToControlVoltageService {
       this.handleNoteOff(message);
     } else if (message.command === MidiMessage.COMMAND_PITCH_BEND) {
       this.handlePitchBend(message);
+    } else if (message.command === MidiMessage.COMMAND_PRESSURE) {
+      this.handlePressureChange(message);
+    } else if (message.command === MidiMessage.COMMAND_CONTROL_CHANGE) {
+      this.handleControlChange(message);
     }
   }
 
@@ -38,7 +42,7 @@ export class MidiToControlVoltageService {
 
       if (channelConfig.pressureVoltageChannel != null) {
         this.controlOutputService.setVoltageOutput(channelConfig.pressureVoltageChannel,
-                                                   this.midiVelocityToVoltage(message.data1));
+                                                   this.midiControlToVoltage(message.data2));
       }
 
       if (channelConfig.gateChannel != null) {
@@ -47,6 +51,17 @@ export class MidiToControlVoltageService {
       }
 
       this.controlOutputService.send();
+    }
+  }
+
+
+  private handlePressureChange(message: MidiMessage) {
+    const channelConfig = this.configService.getChannelConfig(message.channel);
+    if (channelConfig) {
+      if (channelConfig.pressureVoltageChannel != null) {
+        this.controlOutputService.setVoltageOutput(channelConfig.pressureVoltageChannel,
+          this.midiControlToVoltage(message.data2));
+      }
     }
   }
 
@@ -75,6 +90,16 @@ export class MidiToControlVoltageService {
     }
   }
 
+  private handleControlChange(message: MidiMessage) {
+    const channelConfig = this.configService.getChannelConfig(message.channel);
+    if (channelConfig) {
+      const outputChannel = channelConfig.controlVoltageChannels[message.data1];
+      if (outputChannel) {
+        this.controlOutputService.setVoltageOutput(outputChannel, this.midiControlToVoltage(message.data2));
+      }
+    }
+  }
+
 
   private midiNoteToVoltage(midiNote: number, channelConfig: ChannelConfig): number {
     const scale = this.configService.getSelectedScale();
@@ -89,9 +114,8 @@ export class MidiToControlVoltageService {
     return ((value - 8192) / 8192) / 12; // +/- 1/12th of an octave
   }
 
-  private midiVelocityToVoltage(note: number): number {
-    // TODO convert midi velocity to voltage
-    return 0;
+  private midiControlToVoltage(velocity: number): number {
+    return (velocity / 128) * 10; // voltage from 0 to 10
   }
 
 }
