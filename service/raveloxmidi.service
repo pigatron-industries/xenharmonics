@@ -1,0 +1,14 @@
+[Unit]
+Description=Ravelox MIDI over WiFi Service
+After=network.target
+
+[Service]
+ExecStart=/bin/bash raveloxmidi.sh
+WorkingDirectory=/home/pi/workspace/xenharmonics/service
+StandardOutput=inherit
+StandardError=inherit
+Restart=always
+User=root
+
+[Install]
+WantedBy=multi-user.target
