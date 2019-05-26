@@ -61,6 +61,7 @@ export class MidiToControlVoltageService {
       if (channelConfig.pressureVoltageChannel != null) {
         this.controlOutputService.setVoltageOutput(channelConfig.pressureVoltageChannel,
           this.midiControlToVoltage(message.data2));
+        this.controlOutputService.send();
       }
     }
   }
@@ -72,9 +73,9 @@ export class MidiToControlVoltageService {
       if (channelConfig.gateChannel != null) {
         const gate = new GateOutput(channelConfig.gateChannel, false);
         this.controlOutputService.setGateOutput(gate);
+        this.controlOutputService.send();
       }
 
-      this.controlOutputService.send();
     }
   }
 
@@ -84,9 +85,8 @@ export class MidiToControlVoltageService {
       if (channelConfig.noteVoltageChannel != null) {
         this.controlOutputService.bendVoltageOutput(channelConfig.noteVoltageChannel,
                                                     this.midiPitchBendToVoltage(message));
+        this.controlOutputService.send();
       }
-
-      this.controlOutputService.send();
     }
   }
 
@@ -96,6 +96,7 @@ export class MidiToControlVoltageService {
       const outputChannel = channelConfig.controlVoltageChannels[message.data1 - 1];
       if (outputChannel) {
         this.controlOutputService.setVoltageOutput(outputChannel, this.midiControlToVoltage(message.data2));
+        this.controlOutputService.send();
       }
     }
   }
