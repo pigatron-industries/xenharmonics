@@ -92,7 +92,7 @@ export class MidiToControlVoltageService {
 
   private handleControlChange(message: MidiMessage) {
     const channelConfig = this.configService.getChannelConfig(message.channel);
-    if (channelConfig) {
+    if (channelConfig && channelConfig.controlVoltageChannels != null) {
       const outputChannel = channelConfig.controlVoltageChannels[message.data1];
       if (outputChannel) {
         this.controlOutputService.setVoltageOutput(outputChannel, this.midiControlToVoltage(message.data2));
