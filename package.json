@@ -39,7 +39,7 @@
     "hammerjs": "^2.0.8",
     "method-override": "^3.0.0",
     "morgan": "^1.9.1",
-    "redis": "^2.8.0",
+    "redis": "^3.1.1",
     "rxjs": "^6.0.0",
     "ts-httpexceptions": "^3.1.0",
     "zone.js": "~0.8.26"
