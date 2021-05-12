@@ -28,7 +28,7 @@
     "@angular/platform-browser-dynamic": "^7.0.3",
     "@angular/router": "^7.0.3",
     "@tsed/common": "^4.32.0",
-    "@tsed/core": "^4.32.0",
+    "@tsed/core": "^5.65.7",
     "@tsed/servestatic": "^4.32.0",
     "@tsed/swagger": "^4.32.0",
     "body-parser": "^1.18.3",
